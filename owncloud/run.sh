@@ -47,7 +47,7 @@ function first_run() {
   sleep 10
 }
 
-if [ ! -a /data/.provisioned ]
+if [ ! -f "/data/.provisioned" ];
 then
   first_run
 fi
