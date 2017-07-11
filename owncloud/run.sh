@@ -3,6 +3,23 @@
 function first_run() {
   echo FIRST RUN
 
+  mkdir -p /data/owncloud \
+           /data/owncloud/config \
+           /data/owncloud/data \
+           /data/nginx-log
+
+  cp -r /var/www/apps   /data/owncloud
+  cp -r /var/www/config /data/owncloud
+  cp -r /var/lib/mysql  /data
+  rm -rf /var/www/apps \
+         /var/www/config 
+  ln -s /data/owncloud/config /var/www
+  ln -s /data/owncloud/apps /var/www
+  ln -s /data/owncloud/data /var/www
+
+  chown -R www-data:www-data /data/owncloud /var/www
+  chown -R mysql:mysql /data/mysql
+
   SQL_ROOT_PASSWORD="$(pwgen -s -1 16)"
   SQL_OWNCLOUD_PASSWORD="$(pwgen -s -1 16)"
 
