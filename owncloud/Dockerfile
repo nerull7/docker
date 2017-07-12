@@ -35,6 +35,16 @@ RUN rm /var/www/owncloud-${OWNCLOUD_VER}.tar.bz2 \
        /var/www/owncloud/.user.ini
 RUN rmdir /var/www/owncloud
 
+# Provision data
+RUN mkdir -p /provision/owncloud
+RUN cp -r /var/www/apps   /provision/owncloud
+RUN cp -r /var/www/config /provision/owncloud
+RUN rm -rf /var/www/apps \
+           /var/www/config
+RUN ln -s /data/owncloud/config /var/www
+RUN ln -s /data/owncloud/apps /var/www
+RUN ln -s /data/owncloud/data /var/www
+
 EXPOSE 80
 VOLUME ["/data"]
 

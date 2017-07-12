@@ -8,14 +8,9 @@ function first_run() {
            /data/owncloud/data \
            /data/nginx-log
 
-  cp -r /var/www/apps   /data/owncloud
-  cp -r /var/www/config /data/owncloud
+  cp -r /provision/owncloud/apps   /data/owncloud
+  cp -r /provision/owncloud/config /data/owncloud
   cp -r /var/lib/mysql  /data
-  rm -rf /var/www/apps \
-         /var/www/config 
-  ln -s /data/owncloud/config /var/www
-  ln -s /data/owncloud/apps /var/www
-  ln -s /data/owncloud/data /var/www
 
   chown -R www-data:www-data /data/owncloud /var/www
   chown -R mysql:mysql /data/mysql
