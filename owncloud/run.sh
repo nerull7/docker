@@ -34,6 +34,7 @@ function first_run() {
    --database "mysql" --database-name "owncloud" \
    --database-user "owncloud" --database-pass "$SQL_OWNCLOUD_PASSWORD" \
    --admin-user "admin" --admin-pass "password"
+  gosu www-data php occ background:cron
 
   killall mysqld
 

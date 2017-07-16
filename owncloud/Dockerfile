@@ -5,7 +5,7 @@ ENV OWNCLOUD_VER 10.0.2
 
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
-    apt-get install -y nginx mysql-server php-fpm php-mysql php-gd php-json php-curl php-intl php-mcrypt php-imagick php-zip php-xml php-mbstring php-smbclient pwgen bzip2 gosu supervisor && \
+    apt-get install -y nginx mysql-server php-fpm php-mysql php-gd php-json php-curl php-intl php-mcrypt php-imagick php-zip php-xml php-mbstring php-smbclient pwgen bzip2  gosu supervisor cron && \
     apt-get clean
 
 # Make required catalogs
@@ -34,6 +34,7 @@ RUN rm /var/www/owncloud-${OWNCLOUD_VER}.tar.bz2 \
        /var/www/owncloud/.htaccess \
        /var/www/owncloud/.user.ini
 RUN rmdir /var/www/owncloud
+RUN echo "*/15 *  * * *   www-data php -f /var/www/cron.php" >> /etc/crontab
 
 # Provision data
 RUN mkdir -p /provision/owncloud
